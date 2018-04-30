@@ -69,7 +69,7 @@ def Afunc(n, Q, V, P, As=None):
         As[0] = A
     else: A = As[0]
 
-    for j in xrange(1, n):
+    for j in range(1, n):
         if j not in As:
             A_new = P*V*Ufunc(j,Q,V,P)
             As[j] = A_new
@@ -221,8 +221,8 @@ def pt_operators(N, L, J, theta, f, phi, band_idxs, deltaE, exact=False, qs=None
         HfOps.append(Hf)
     [Partitions, H0Energies] = H0Op.get_bands_and_energies() # get all the partitions and energies of each
     BandEnergy = H0Energies[BandIdxs[0]] # get the energy of the band we start from, this is E0
-    BandPartitions = map(lambda x: Partitions[x], BandIdxs) # get the
-    FullBand = np.vstack(map(lambda x: pfcy.GetFullBandDW(BandPartitions[x]), range(len(BandIdxs))))
+    BandPartitions = list(map(lambda x: Partitions[x], BandIdxs)) # get the
+    FullBand = np.vstack(list(map(lambda x: pfcy.GetFullBandDW(BandPartitions[x]), range(len(BandIdxs)))))
     FullBandDim = len(FullBand)
     [NeighbouringBands,] = np.where(np.abs(H0Energies - BandEnergy) < DeltaE) # find other bands within deltaE in energy
     FullSubspace = np.copy(FullBand)
@@ -241,7 +241,7 @@ def pt_operators(N, L, J, theta, f, phi, band_idxs, deltaE, exact=False, qs=None
     if verbose: print('Time taken to calculate H0 matrix: ' + str(e-s) + ' seconds.')
 
     s = time.time()
-    Hfs = map(lambda x : HfOps[x].mats_subspace(FullSubspace), qs)
+    Hfs = list(map(lambda x : HfOps[x].mats_subspace(FullSubspace), qs))
     e = time.time()
     if verbose: print('Time taken to calculate V matrices: ' + str(e-s) + ' seconds.')
     denominators = (BandEnergy - H0.diagonal()[FullBandDim:])
@@ -252,8 +252,8 @@ def pt_operators(N, L, J, theta, f, phi, band_idxs, deltaE, exact=False, qs=None
     if exact:
         Offset = np.sum(map(lambda x: len(pfcy.GetFullBandDW(Partitions[x])), range(min(BandIdxs))))
         # for debugging purposes, calculate some of full spectrum exactly, can be time consuming
-        FullEs = map(lambda x: pf.Diagonalise(N, L, J, theta, f, phi, q=x, k=Offset + FullBandDim), qs)
-        FullEs = map(lambda x: FullEs[x][0][Offset:(Offset+FullBandDim)], qs)
+        FullEs = list(map(lambda x: pf.Diagonalise(N, L, J, theta, f, phi, q=x, k=Offset + FullBandDim), qs))
+        FullEs = list(map(lambda x: FullEs[x][0][Offset:(Offset+FullBandDim)], qs))
     else:
         FullEs = None
 

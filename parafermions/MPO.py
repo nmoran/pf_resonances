@@ -178,16 +178,16 @@ class MPO(object):
             phys_indices = subspace[i,::-1]
             # more optimal
             l = np.tensordot(self.Lp, self.Ws[0][:, :,phys_indices[0],:], axes=([0], [0]))
-            for site in range(1, self.L/2):
+            for site in range(1, self.L//2):
                 l = np.tensordot(l, self.Ws[site][:,:,phys_indices[site],:], axes=([site-1], [0]))
 
             r = np.tensordot(self.Rp, self.Ws[self.L-1][:, :,phys_indices[self.L-1],:], axes=([0], [1]))
-            for j in range(self.L-2, self.L/2-1, -1):
+            for j in range(self.L-2, self.L//2-1, -1):
                 r = np.tensordot(self.Ws[j][:,:,phys_indices[j],:], r, axes=([1], [0]))
 
             # we try to create sparse matrices for l and r and then perform tensor operation as sparse matrix multiplication.
             ld = len(l.shape)
-            l = np.transpose(l, axes=range(ld-2)+[ld-1, ld-2]) # permute last two indices
+            l = np.transpose(l, axes=list(range(ld-2))+[ld-1, ld-2]) # permute last two indices
             l = np.reshape(l, (np.prod(l.shape[:-1]), l.shape[-1]))
             ls = sps.csr_matrix(l)
             r = np.reshape(r, (r.shape[0], np.prod(r.shape[1:])))
