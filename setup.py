@@ -1,5 +1,6 @@
 from distutils.core import setup
 from distutils.extension import Extension
+from disttest import test
 from Cython.Distutils import build_ext
 import Cython.Compiler.Options
 import numpy
@@ -109,9 +110,15 @@ setup(
     author='Niall Moran',
     author_email='niall.moran@gmail.com',
     license = 'GPLv3',
-    cmdclass = {'build_ext': build_ext},
+    cmdclass = {'build_ext': build_ext, 'test': test},
     packages = ['parafermions'],
     package_dir = {'.' : '.'},
     scripts = ['parafermions/PFFullDiag.py', 'parafermions/PFPT.py', 'parafermions/PFData.py'],
-    ext_modules= Extensions
+    ext_modules= Extensions,
+    options={
+      'test':
+        {
+          'test_dir': ['parafermions/tests']
+        }
+      }
 )

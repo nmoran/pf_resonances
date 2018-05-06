@@ -1,7 +1,7 @@
 # Some codes for treating parafermion chains
 
-Some python code for simulating parafermion chains. The code has been written with python 2.7 in mind but should run 
-with python 3 with minimal changes.
+A python package for simulating 1D quantum systems using tensor networks and exact diagonalisation. 
+Particular focus on parafermionic chains.
 
 ## Installation
 
