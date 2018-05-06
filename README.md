@@ -1,5 +1,7 @@
 # Some codes for treating parafermion chains
 
+[![Build Status](https://travis-ci.org/nmoran/pf_resonances.svg?branch=master)](https://travis-ci.org/nmoran/pf_resonances)
+
 A python package for simulating 1D quantum systems using tensor networks and exact diagonalisation. 
 Particular focus on parafermionic chains.
 
