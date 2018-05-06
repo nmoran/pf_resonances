@@ -9,7 +9,7 @@ import sys
 import os
 import subprocess
 
-Cython.Compiler.Options.annotate = True
+Cython.Compiler.Options.annotate = False
 
 def runcommand(cmd):
     try:
