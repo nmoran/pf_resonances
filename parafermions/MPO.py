@@ -1180,7 +1180,7 @@ def diagonalise(v, O):
         Matrix containing diagonalised states.
     """
     dim = v.shape[1]
-    mat = np.zeros((dim, dim), dtype=np.complex128)
+    mat = np.zeros((dim, dim), dtype=O.dtype)
     if isinstance(O, MPO):
         for i in range(dim):
             for j in range(dim):
