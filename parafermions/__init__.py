@@ -9,3 +9,4 @@ from parafermions.PerturbationTheoryUtils import *
 from parafermions.MPS import *
 from parafermions.MPO import *
 from parafermions.CommutatorOp import *
+from parafermions.PeschelEmeryModel import *
