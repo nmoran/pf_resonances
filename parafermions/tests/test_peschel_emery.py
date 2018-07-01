@@ -22,5 +22,5 @@ class Test(unittest.TestCase):
         pe = pf.PeschelEmerySpinHalf(N, l, dtype=np.dtype('float64'))
         d, v = pe.Diagonalise(k=100)
         # check only the ground state eigenvalues are degenerate
-        assert((d[1]-d[0]) < 1e-15)
+        assert((d[1]-d[0]) < 1e-14)
         assert(np.sum(d[1:10:2]-d[:10:2]) > 1e-2)
