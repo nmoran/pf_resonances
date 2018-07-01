@@ -12,13 +12,15 @@ class Test(unittest.TestCase):
 
     def test_pe_degeneracy(self):
         # should initialise with all zeros
-        N, l = 8, 0.2
+        N, l = 8, 0.0
         pe = pf.PeschelEmerySpinHalf(N, l, dtype=np.dtype('float64'))
         d, v = pe.Diagonalise(k=100)
-        assert(np.sum(d[1:11:2]-d[:11:2]) < 1e-10)
+        # check that all eigenvalues are degenerate
+        assert(np.sum(d[1:10:2]-d[:10:2]) < 1e-10)
 
         N, l = 8, 1.0
         pe = pf.PeschelEmerySpinHalf(N, l, dtype=np.dtype('float64'))
         d, v = pe.Diagonalise(k=100)
+        # check only the ground state eigenvalues are degenerate
         assert((d[1]-d[0]) < 1e-15)
-        assert(np.sum(d[1:11:2]-d[:11:2]) > 1e-2)
+        assert(np.sum(d[1:10:2]-d[:10:2]) > 1e-2)
