@@ -15,10 +15,10 @@ class Test(unittest.TestCase):
         N, l = 8, 0.2
         pe = PeschelEmerySpinHalf(N, l, dtype=np.dtype('float64'))
         d, v = pe.Diagonalise(k=100)
-        assert(np.sum(d[1:11:2]-d[:11:2] < 1e-10)
+        assert(np.sum(d[1:11:2]-d[:11:2]) < 1e-10)
 
         N, l = 8, 1.0
         pe = PeschelEmerySpinHalf(N, l, dtype=np.dtype('float64'))
         d, v = pe.Diagonalise(k=100)
         assert((d[1]-d[0]) < 1e-15)
-        assert(np.sum(d[1:11:2]-d[:11:2] > 1e-2)
+        assert(np.sum(d[1:11:2]-d[:11:2]) > 1e-2)
