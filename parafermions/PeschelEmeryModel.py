@@ -1,5 +1,7 @@
 import numpy as np
 
+from parafermions.MPO import MPO
+
 class PeschelEmerySpinHalf(MPO):
     """
     Class which contains method for treating Peschel Emery line of parameters
